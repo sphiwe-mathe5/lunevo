@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.env
+
+# Next.js / Node
+node_modules/
+.next/
+out/
+build/
+.vercel/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Database
+db.sqlite3
+db.sqlite3-journal
+
+# Secrets & Credentials
+google-credentials.json
+.env.*
+*.pem
+
+# OS generated files
+.DS_Store
+Thumbs.db
