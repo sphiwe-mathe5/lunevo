@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Restock Request</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f9fafb;
+            color: #111827;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background-color: #0f172a;
+            color: #ffffff;
+            padding: 24px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        .content {
+            padding: 32px 24px;
+        }
+        .greeting {
+            font-size: 16px;
+            margin-bottom: 24px;
+        }
+        .callout {
+            background-color: #f8fafc;
+            border-left: 4px solid #3b82f6;
+            padding: 16px;
+            margin-bottom: 24px;
+            border-radius: 0 4px 4px 0;
+        }
+        .callout h2 {
+            margin: 0 0 8px 0;
+            font-size: 18px;
+            color: #1e293b;
+        }
+        .callout p {
+            margin: 0;
+            font-size: 15px;
+            color: #475569;
+        }
+        .details-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 24px;
+        }
+        .details-table th, .details-table td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .details-table th {
+            font-weight: 600;
+            color: #64748b;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+        .footer {
+            background-color: #f1f5f9;
+            padding: 24px;
+            text-align: center;
+            font-size: 14px;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Automated Restock Request</h1>
+        </div>
+        <div class="content">
+            <div class="greeting">
+                Hello {{ supplier.name }},
+            </div>
+            
+            <div class="callout">
+                <h2>Stock Running Low</h2>
+                <p>
+                    This is an automated notification from <strong>{{ clinic.name|default:"Lunevo System" }}</strong>. 
+                    Our inventory levels for <strong>{{ product.name }}</strong> have dropped below our minimum threshold and require an immediate restock.
+                </p>
+            </div>
+
+            <table class="details-table">
+                <tr>
+                    <th>Product Code</th>
+                    <td>{{ product.code }}</td>
+                </tr>
+                <tr>
+                    <th>Product Name</th>
+                    <td>{{ product.name }}</td>
+                </tr>
+                <tr>
+                    <th>Unit Type</th>
+                    <td>{{ product.unit_type }}</td>
+                </tr>
+                {% if recent_batch %}
+                <tr>
+                    <th>Last Batch Supplied</th>
+                    <td>{{ recent_batch.batch_number }} (Received: {{ recent_batch.date_received }})</td>
+                </tr>
+                {% endif %}
+            </table>
+
+            <p>Please contact us to arrange the next delivery. Thank you for your continued partnership.</p>
+        </div>
+        <div class="footer">
+            &copy; {% now "Y" %} Lunevo Healthcare Systems. All rights reserved.
+        </div>
+    </div>
+</body>
+</html>
